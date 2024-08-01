@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/aboutus">Food Finder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/addstall">Add Stall</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Halal
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <% const halaloption = new Set(stalls.map(stall => stall.halal)); %>
+              <% halaloption.forEach(halal => { %>
+                  <a class="dropdown-item" href="/halal/<%= halal %>"><%= halal %></a>
+              <% }); %>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Location
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <% const uniqueLocations = new Set(stalls.map(stall => stall.location)); %>
+              <% uniqueLocations.forEach(location => { %>
+                  <a class="dropdown-item" href="/location/<%= location %>"><%= location %></a>
+              <% }); %>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Cuisine
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <% const uniqueCuisines = new Set(stalls.map(stall => stall.cuisine)); %>
+              <% uniqueCuisines.forEach(cuisine => { %>
+                  <a class="dropdown-item" href="/cuisine/<%= cuisine %>"><%= cuisine %></a>
+              <% }); %>
+            </div>
+          </li>
+        </ul>
+        <input class="d-flex ms-auto" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    function myFunction() {
+      var input, filter, container, rows, cardTitle, i, txtValue;
+      input = document.getElementById('myInput');
+      filter = input.value.toUpperCase();
+      container = document.getElementById("myUL");
+      rows = container.getElementsByClassName('card-item');
+  
+      for (i = 0; i < rows.length; i++) {
+        cardTitle = rows[i].getElementsByClassName("card-title")[0];
+        txtValue = cardTitle.textContent || cardTitle.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          rows[i].style.display = "";
+        } else {
+          rows[i].style.display = "none";
+        }
+      }
+    }
+  </script>
